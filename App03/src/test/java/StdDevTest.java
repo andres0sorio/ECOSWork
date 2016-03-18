@@ -13,15 +13,18 @@ import org.junit.Test;
  * 
  * Original Author: @author AOSORIO
  * 
- * Description: [one line class summary]
+ * Description: Test class for the StdDev calculation
  * 
- * Implementation: [Notes on implementation]
+ * Implementation: -
  *
  * Created: Mar 17, 2016 12:47:53 PM
  * 
  */
 public class StdDevTest {
 
+	/**
+	 * Test based on the expected values on Table 1 col 1
+	 */
 	@Test
 	public void testTable1() {
 		
@@ -45,6 +48,9 @@ public class StdDevTest {
 		assertEquals(61.7137, output, 0.0001 );
 	}
 
+	/**
+	 * Test based on the expected values on Table 1 col 2
+	 */
 	@Test
 	public void testTable2() {
 		

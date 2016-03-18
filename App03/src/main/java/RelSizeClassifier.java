@@ -13,9 +13,9 @@ import java.util.Iterator;
  * 
  * Original Author: @author AOSORIO
  * 
- * Description: [one line class summary]
+ * Description: Classifier
  * 
- * Implementation: [Notes on implementation]
+ * Implementation: -
  *
  * Created: Mar 16, 2016 3:25:48 PM
  * 
@@ -56,7 +56,6 @@ public class RelSizeClassifier {
 		while (itr.hasNext()) {
 			String relsize = itr.next();
 			double value = RelSizeRanges.getRange(relsize);
-			//System.out.println("* " + relsize + " " + value);
 			output.addRow(relsize, value);
 		}
 		

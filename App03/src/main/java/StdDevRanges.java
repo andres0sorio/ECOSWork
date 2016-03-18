@@ -16,9 +16,9 @@ import java.util.Map;
  * 
  * Original Author: @author AOSORIO
  * 
- * Description: [one line class summary]
+ * Description: StdDev almacena el contenedos con las disitn clase
  * 
- * Implementation: [Notes on implementation]
+ * Implementation: -
  *
  * Created: Mar 16, 2016 1:14:42 AM
  * 
