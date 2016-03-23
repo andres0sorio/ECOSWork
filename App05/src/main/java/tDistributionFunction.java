@@ -11,17 +11,17 @@
  * 
  * Description: Student t-distribution
  * 
- * Implementation: Implements interface OneDimFunction
+ * Implementation: Implements interface IOneDimFunction
  *
  * Created: Mar 21, 2016 7:13:08 PM
  * 
  */
-public class tDistributionFunction implements OneDimFunction {
+public class tDistributionFunction implements IOneDimFunction {
 
 	double [] params;
 		
 	/** Constructor method
-	 * @param params
+	 * @param params the parameters of this function
 	 */
 	public tDistributionFunction(double[] params) {
 		super();
@@ -36,7 +36,7 @@ public class tDistributionFunction implements OneDimFunction {
 	}
 
 	/* (non-Javadoc)
-	 * @see OneDimFunction#setParams(double[])
+	 * @see IOneDimFunction#setParams(double[])
 	 */
 	@Override
 	public void setParams(double[] params) {
@@ -44,7 +44,7 @@ public class tDistributionFunction implements OneDimFunction {
 	}
 
 	/* (non-Javadoc)
-	 * @see OneDimFunction#doEval(double)
+	 * @see IOneDimFunction#doEval(double)
 	 */
 	@Override
 	public double doEval(double x) {

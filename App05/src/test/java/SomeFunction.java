@@ -11,17 +11,17 @@
  * 
  * Description: This is a simple fucntion (Sqrt(x)) for testing purposes
  * 
- * Implementation: Implements interface OneDimFunction
+ * Implementation: Implements interface IOneDimFunction
  *
  * Created: Mar 21, 2016 7:28:43 PM
  * 
  */
-public class SomeFunction implements OneDimFunction {
+public class SomeFunction implements IOneDimFunction {
 
 	double [] params;
 
 	/** Constructor method
-	 * @param params
+	 * @param params parameters of this function
 	 */
 	public SomeFunction(double[] params) {
 		super();
@@ -29,7 +29,7 @@ public class SomeFunction implements OneDimFunction {
 	}
 
 	/* (non-Javadoc)
-	 * @see OneDimFunction#doEval(double)
+	 * @see IOneDimFunction#doEval(double)
 	 */
 	@Override
 	public double doEval(double x) {	
@@ -39,7 +39,7 @@ public class SomeFunction implements OneDimFunction {
 	}
 
 	/* (non-Javadoc)
-	 * @see OneDimFunction#setParams(double[])
+	 * @see IOneDimFunction#setParams(double[])
 	 */
 	@Override
 	public void setParams(double[] params) {

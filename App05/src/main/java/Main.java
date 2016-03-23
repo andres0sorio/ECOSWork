@@ -75,7 +75,7 @@ public class Main {
 		double[] params = new double[2];
 		params[0] = 9.0; // dof
 
-		OneDimFunction tDistFunction = (OneDimFunction) new tDistributionFunction(params);
+		IOneDimFunction tDistFunction = (IOneDimFunction) new tDistributionFunction(params);
 
 		NumericalIntegration numIntegration = new NumericalIntegration(tDistFunction, 0.0, 1.1);
 

@@ -21,7 +21,7 @@ public class NumericalIntegration {
 
 	public final static double ERROR = 0.000001;
 
-	private OneDimFunction integrand = null;
+	private IOneDimFunction integrand = null;
 	private double lowerLimit = Double.NaN;
 	private double upperLimit = Double.NaN;
 	private double deltaX = 0.0;
@@ -30,11 +30,11 @@ public class NumericalIntegration {
 	private boolean isEvaluable;
 
 	/** Constructor method
-	 * @param integrand : a OneDimFunction (previously defined)
+	 * @param integrand : a IOneDimFunction (previously defined)
 	 * @param lowerLimit limit  integration a
 	 * @param upperLimit limit  integration b
 	 */
-	public NumericalIntegration(OneDimFunction integrand, double lowerLimit, double upperLimit) {
+	public NumericalIntegration(IOneDimFunction integrand, double lowerLimit, double upperLimit) {
 		super();
 		this.isEvaluable = false;
 		this.integrand = integrand;
@@ -48,16 +48,16 @@ public class NumericalIntegration {
 	}
 
 	/** Getter for integrand
-	 * @return
+	 * @return the integrand function
 	 */
-	public OneDimFunction getIntegrand() {
+	public IOneDimFunction getIntegrand() {
 		return integrand;
 	}
 
 	/** Setter for integrand
-	 * @param integrand
+	 * @param integrand pass the integrand, should be an implementation of IOneDimFunction
 	 */
-	public void setIntegrand(OneDimFunction integrand) {
+	public void setIntegrand(IOneDimFunction integrand) {
 		this.integrand = integrand;
 	}
 
@@ -93,7 +93,7 @@ public class NumericalIntegration {
 	}
 
 	/** do Integration : implements Simmson's rule for numerical integration
-	 * @return result
+	 * @return result of this integral
 	 */
 	public double doIntegral() {
 
@@ -119,7 +119,7 @@ public class NumericalIntegration {
 				fEven += 2.0 * integrand.doEval(i * deltaX + lowerLimit);
 			}
 
-			double fx = (deltaX / 3.0) * integrand.doEval(upperLimit);
+			double fx = integrand.doEval(upperLimit);
 
 			integral = (deltaX / 3.0) * (f0 + fOdd + fEven + fx);
 

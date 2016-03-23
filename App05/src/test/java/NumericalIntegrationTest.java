@@ -13,9 +13,9 @@ import org.junit.Test;
  * 
  * Original Author: @author AOSORIO
  * 
- * Description: [one line class summary]
+ * Description: Test for Numerical Integration class
  * 
- * Implementation: [Notes on implementation]
+ * Implementation: JUnit 4
  *
  * Created: Mar 21, 2016 8:23:34 PM
  * 
@@ -31,15 +31,15 @@ public class NumericalIntegrationTest {
 		double[] params = new double[1];
 		params[0] = 1.0;
 
-		OneDimFunction sqrtFunct = (OneDimFunction) new SomeFunction(params);
+		IOneDimFunction sqrtFunct = (IOneDimFunction) new SomeFunction(params);
 		NumericalIntegration numIntegration = new NumericalIntegration(sqrtFunct, 1.0, 10.0);
 		double result = numIntegration.doIntegral();
 		assertEquals(20.4152, result, 0.0001);
 	}
 
 	/**
-	 * Test the case when the integration limits are inverted so a > b
-	 * Implementation is only for a < b
+	 * Test the case when the integration limits are inverted so a &gt; b
+	 * Implementation is only for a &lt; b
 	 */
 	@Test
 	public void TestLimits() {
@@ -49,7 +49,7 @@ public class NumericalIntegrationTest {
 		try {
 			double[] params = new double[1];
 			params[0] = 1.0;
-			OneDimFunction sqrtFunct = (OneDimFunction) new SomeFunction(params);
+			IOneDimFunction sqrtFunct = (IOneDimFunction) new SomeFunction(params);
 			NumericalIntegration numIntegration = new NumericalIntegration(sqrtFunct, 100.0, 10.0);
 			numIntegration.setLimits(10.0, 5.0);
 			numIntegration.doIntegral();
@@ -72,7 +72,7 @@ public class NumericalIntegrationTest {
 		double[] params = new double[1];
 		params[0] = 9.0;
 
-		OneDimFunction tdistFunction = (OneDimFunction) new tDistributionFunction(params);
+		IOneDimFunction tdistFunction = (IOneDimFunction) new tDistributionFunction(params);
 		NumericalIntegration numIntegration = new NumericalIntegration(tdistFunction, 0.0, 1.1);
 		double result = numIntegration.doIntegral();
 		assertEquals(0.35006, result, 0.00001);
@@ -88,7 +88,7 @@ public class NumericalIntegrationTest {
 		double[] params = new double[1];
 		params[0] = 10.0;
 
-		OneDimFunction tdistFunction = (OneDimFunction) new tDistributionFunction(params);
+		IOneDimFunction tdistFunction = (IOneDimFunction) new tDistributionFunction(params);
 		NumericalIntegration numIntegration = new NumericalIntegration(tdistFunction, 0.0, 1.1812);
 		double result = numIntegration.doIntegral();
 		assertEquals(0.36757, result, 0.00001);
@@ -104,7 +104,7 @@ public class NumericalIntegrationTest {
 		double[] params = new double[1];
 		params[0] = 30.0;
 
-		OneDimFunction tdistFunction = (OneDimFunction) new tDistributionFunction(params);
+		IOneDimFunction tdistFunction = (IOneDimFunction) new tDistributionFunction(params);
 		NumericalIntegration numIntegration = new NumericalIntegration(tdistFunction, 0.0, 2.750);
 		double result = numIntegration.doIntegral();
 		assertEquals(0.49500, result, 0.00001);
