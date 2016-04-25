@@ -1,0 +1,6 @@
+target
+doc
+bin
+.env
+.idea/
+*.iml
