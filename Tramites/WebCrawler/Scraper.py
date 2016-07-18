@@ -47,9 +47,9 @@ class Scraper(object):
             docs = self.soup.find('ul', id="DOCUMENTO1").find_all('li')
             for doc in docs:
                 itemc1 = replaceLatin( doc.contents[0].encode(encoding).strip() )
-                itemc2 = replaceLatin( doc.contents[1].encode(encoding).contents[0].strip() )
+                itemc2 = replaceLatin( doc.contents[1].contents[0].encode(encoding).strip() )
                 require = itemc1 + itemc2
-                requerimientos = ",".join(require.split("*"))
+                requerimientos = ",".join(require.split(":"))
                 result.append(requerimientos)
             if len(result) == 0:
                 result.append("No data")

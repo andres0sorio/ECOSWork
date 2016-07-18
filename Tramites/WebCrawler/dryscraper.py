@@ -11,7 +11,7 @@ session = dryscrape.Session(mydriver)
 url = 'https://www.sivirtual.gov.co/memoficha-tramite/-/tramite/T34188'
 url = 'https://www.sivirtual.gov.co/memoficha-tramite/-/tramite/T31463'
 url = 'https://www.sivirtual.gov.co/memoficha-tramite/-/tramite/T29684'
-url = 'https://www.sivirtual.gov.co/memoficha-tramite/-/tramite/T33703'
+#url = 'https://www.sivirtual.gov.co/memoficha-tramite/-/tramite/T33703'
 
 session.visit(url)
 response = session.body()
