@@ -1,18 +1,12 @@
 #!/usr/bin/python
 
-import numpy
-import random
 import unittest
-import time
-import datetime
-from datetime import date
 import ROOT
 from ROOT import TTimeStamp
 from ROOT import TDatime
 from ROOT import gStyle
 from optparse import OptionParser
 import json
-
 
 #-----------------------------------------------------
 parser = OptionParser()
@@ -21,17 +15,16 @@ parser.add_option("-i", type = "string", dest="input",
 
 (options, args) = parser.parse_args()
 
-#if options.input is None:
-#        parser.error("please give an input")
+if options.input is None:
+        parser.error("please give an input")
 
 #-----------------------------------------------------
 
-#infile = options.input
-
-infile = 'jsondata_all.json'
+infile = options.input
 
 counter = 0
-codes = {}
+codes   = {}
+nombres = {}
 
 histos = []
 histos.append( ROOT.TH1F("Basic1","N pasos", 10, 0.0, 10.00) )
@@ -45,14 +38,19 @@ with open(infile) as inputfile:
 		data  = json.loads( jsonstr )
 
 		npasos = len( data['pasos'] )
-
 		code = data['codigo']
-
+		name = data['nombre']
+		
 		if code in codes:
 			continue
 		else:
 			codes[code] = 1
-			
+
+		if name in nombres:
+			continue
+		else:
+			nombres[name] = 1
+					
                 nverif = 0
                 nresul = 0
                 nreqs  = 0
@@ -72,10 +70,6 @@ with open(infile) as inputfile:
 		histos[3].Fill( float(nreqs)  )
 				
 		counter += 1
-
-		
-
-
 			
 print counter
 

@@ -6,21 +6,18 @@ import json
 from pylab import *
 import operator
 
-#-----------------------------------------------------
+#----------------------------------------------------------------------
 parser = OptionParser()
 parser.add_option("-i", type = "string", dest="input",
                   help="Input file with results", metavar="input" )
 
 (options, args) = parser.parse_args()
 
-#if options.input is None:
-#        parser.error("please give an input")
+if options.input is None:
+        parser.error("please give an input")
+#----------------------------------------------------------------------
 
-#-----------------------------------------------------
-
-#infile = options.input
-
-infile = 'jsondata_all.json'
+infile = options.input
 
 counter = 0
 codes = {}
@@ -67,35 +64,54 @@ sorted_x1 = sorted( steps.items(), key=operator.itemgetter(1))
 sorted_x2 = sorted( requirements.items(), key=operator.itemgetter(1))
 
 max = len(sorted_x1)
+ymin = max/2.0
+yi = 0
 
 for xx in sorted_x1:
+	if yi < ymin:
+		yi += 1
+		continue
 	x1.append(xx[1]/float(counter)*100.0)
 	y1.append(xx[0])
+	yi += 1
+	
+pos = arange( len(y1) )+.5
 
-pos = arange(max)+.5
+print len(pos),len(y1)
 
-figure(1,facecolor='white')
-barh(pos,x1, align='center')
-yticks(pos, y1)
-xlabel('Ocurrencia [%]')
-title('Tramites - accion primaria')
-grid(True)
+plt.figure(1,facecolor='white')
+plt.subplots_adjust(left=0.18, right=0.85)
+
+plt.barh(pos,x1, align='center')
+plt.yticks(pos, y1)
+plt.xlabel('Ocurrencia [%]')
+plt.title('Tramites - accion primaria')
+plt.grid(True)
 
 max = len(sorted_x2)
-npos = 0
+ymin = max*0.70
+yi = 0
+
 for xx in sorted_x2:
+	if yi < ymin:
+		yi += 1
+		continue
 	x2.append(xx[1]/float(counter)*100.0)
 	y2.append(xx[0])
-	npos += 1
+	yi += 1
 
-pos2 = arange(max)+.5
+pos2 = arange( len(y2) )+.5
 
-figure(2, facecolor='white')
-barh(pos2,x2, align='center')
-yticks(pos2, y2)
-xlabel('Ocurrencia [%]')
-title('Tramites - documentos requeridos')
-grid(True)
+print len(pos2), len(y2)
 
-show()
+plt.figure(2, facecolor='white')
+plt.subplots_adjust(left=0.18, right=0.85)
+
+plt.barh(pos2,x2, align='center')
+plt.yticks(pos2, y2)
+plt.xlabel('Ocurrencia [%]')
+plt.title('Tramites - documentos requeridos')
+plt.grid(True)
+
+plt.show()
 

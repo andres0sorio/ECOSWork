@@ -6,28 +6,32 @@ import json
 from pylab import *
 import operator
 
-#-----------------------------------------------------
+#--------------------------------------------------------------------
 parser = OptionParser()
 parser.add_option("-i", type = "string", dest="input",
                   help="Input file with results", metavar="input" )
 
+parser.add_option("-o", type = "string", dest="output",
+                  help="Output file with results", metavar="output" )
+
 (options, args) = parser.parse_args()
 
-#if options.input is None:
-#        parser.error("please give an input")
+if options.input is None:
+        parser.error("please give an input")
+	
+if options.output is None:
+        parser.error("please give an output")
+#--------------------------------------------------------------------
 
-#-----------------------------------------------------
-
-#infile = options.input
-
-infile = 'jsondata_grupo3.json'
+infile = options.input
+outfile = options.output
 
 counter = 0
 
 names = {}
 codes = {}
 
-outfile = open('listado_tramites_grupo3.csv','w')
+outputfile = open(outfile,'w')
 
 with open(infile) as inputfile:
 	for line in inputfile:
@@ -58,8 +62,9 @@ for name in sorted(names.keys()):
 	tramites.append(str(len(names[name])))
 	tramites.append(str('+'.join( names[name] )))
 	
-	outfile.write( ','.join(tramites) + '\n')
-	
-	
-outfile.close()
+	outputfile.write( ','.join(tramites) + '\n')
+
+
+inputfile.close()	
+outputfile.close()
 	
