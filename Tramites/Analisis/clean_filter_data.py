@@ -16,7 +16,7 @@ if options.input is None:
 #--------------------------------------------------------------------
 
 infile = options.input
-outfile_name = infile.split('.')[0] + "_clean" + ".dat"
+outfile_name = infile.split('.')[0] + "_clean" + ".json"
 outfile = open( outfile_name, 'w')
 
 counter = 0

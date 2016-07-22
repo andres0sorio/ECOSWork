@@ -10,6 +10,8 @@ import ROOT
 from optparse import OptionParser
 from ROOT import gStyle
 from ROOT import TLine
+from ROOT import TPaveText
+
 
 #------------------------------------------------------------------
 parser = OptionParser()
@@ -24,7 +26,7 @@ if options.input is None:
 
 filename = options.input
 
-h1 = ROOT.TH1F("Exp1","Poblacion municipios cundinamarca < 50 k, 2017 (DANE)", 10, 0.0, 50.0)
+h1 = ROOT.TH1F("Exp1","", 10, 0.0, 50.0)
 
 group1 = []
 group2 = []
@@ -50,27 +52,30 @@ c1 = ROOT.TCanvas("Plot1", "Canvas for plot 1", 385,103,607,452)
 c1.SetFillColor(10)
 c1.SetGridy()
 c1.cd()
-gStyle.SetOptStat(111)
+gStyle.SetOptStat(0)
 
 #c2 = ROOT.TCanvas("Plot2", "Canvas for plot 1", 385,103,607,452)
 #c2.SetFillColor(10)
 #c2.cd()
 
 h1.SetFillColor(5)
-h1.GetXaxis().SetTitle("Numero habitantes [k]")
+h1.GetXaxis().SetTitle("N#acute{u}mero habitantes [x1000]")
 h1.GetXaxis().CenterTitle(True)
 h1.GetXaxis().SetLabelFont(42)
 h1.GetXaxis().SetLabelSize(0.035)
 h1.GetXaxis().SetTitleSize(0.05)
 h1.GetXaxis().SetTitleOffset(0.88)
 h1.GetXaxis().SetTitleFont(42)
-h1.GetYaxis().SetTitle("")
+h1.GetYaxis().SetTitle("N#acute{u}mero de Municipios")
 h1.GetYaxis().CenterTitle(True)
 h1.GetYaxis().SetLabelFont(42)
 h1.GetYaxis().SetLabelSize(0.035)
 h1.GetYaxis().SetTitleSize(0.05)
 h1.GetYaxis().SetTitleOffset(0.98)
 h1.GetYaxis().SetTitleFont(42)
+
+
+
 
 h1.Draw()
 
@@ -90,7 +95,6 @@ line2.SetLineStyle(2)
 line2.SetLineWidth(2)
 line2.Draw()
 
-
 x0 = 15.0
 line3 = TLine(x0, 0.0, x0, ymax)
 line3.SetLineColor(9)
@@ -99,6 +103,17 @@ line3.SetLineWidth(2)
 line3.Draw()
 c1.Modified()
 
+pt = TPaveText(0.15,0.9245775,0.85,0.995,"blNDC")
+pt.SetName("titleT")
+pt.SetBorderSize(0)
+pt.SetFillColor(0)
+pt.SetFillStyle(0)
+pt.SetTextFont(42)
+pt.SetTextSize(0.04225352)
+AText = pt.AddText("Distribuci#acute{o}n Poblaci#acute{o}n municipios Cundinamarca < 50.000, 2017 (DANE)")
+pt.Draw()
+c1.Modified()
+c1.cd()
 
 c1.Print("population_dist.png")
 

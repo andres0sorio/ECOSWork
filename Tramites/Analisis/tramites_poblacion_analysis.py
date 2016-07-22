@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 #!/usr/bin/python
 
 from optparse import OptionParser
@@ -7,7 +8,9 @@ import sys
 sys.path.append('../WebCrawler/')
 from Utilities import replaceLatin
 import numpy as np
+import matplotlib.cm as colormap
 import matplotlib.pyplot as plt
+import matplotlib.patches as mpatches
 
 #-------------------------------------------------------------------
 parser = OptionParser()
@@ -65,6 +68,8 @@ x1T   = []
 area  = []
 colors = []
 
+clmap = colormap.get_cmap('RdYlGn')
+
 for name in sorted(counter.keys()):
 	print name, info[name], counter[name], group[name]
 	nm = ''
@@ -76,34 +81,47 @@ for name in sorted(counter.keys()):
 	y1.append( float(counter[name]) )
 	area.append( np.pi * ( float(info[name]) )**2 )
 	if   group[name] == 'grupo1':
-		colors.append(0.144911803701)
+		colors.append(clmap(0.11))
 	elif group[name] == 'grupo2':
-		colors.append(0.366158837925)
+		colors.append(clmap(0.36))
 	elif group[name] == 'grupo3':
-		colors.append(0.559969698516)
+		colors.append(clmap(0.55))
 	else:
-		colors.append(0.862106972926)
+		colors.append(clmap(0.86))
+		
 
-max = len(x1T)
-x1 = np.arange(max)
+
+max = 4*len(x1T)
+x1 = np.arange(0,max,4)
 
 k = 0
 for x in x1:
 	print x, x1T[k]
 	k += 1
 
-plt.figure(1,facecolor='white',figsize=(14, 7))
-
+fig = plt.figure(1,facecolor='white',figsize=(14, 7))
+ax1 = fig.add_subplot(111)
+		      
 #colors = np.random.rand(max)
 #for co in colors:
 #	print co
 	
-plt.scatter(x1, y1, s=area, c=colors, alpha=0.5)
+plt.scatter(x1, y1, s=area, c=colors, alpha=0.6, cmap=clmap)
 plt.xlim(0.0, max)
-plt.ylim(0.0, 110)
-plt.xticks(x1, x1T, rotation=45, fontsize=8)
+plt.ylim(0.0, 120)
+plt.xticks(x1, x1T, rotation=90, fontsize=9)
 plt.subplots_adjust(bottom=0.15,left=0.10, right=0.97, top=0.93)
-plt.ylabel('Numero de tramites')
-plt.show()
+plt.ylabel(u'Número de tramites')
 
+g1_patch = mpatches.Patch(color=clmap(0.11), label='Grupo 1')
+g2_patch = mpatches.Patch(color=clmap(0.36), label='Grupo 2')
+g3_patch = mpatches.Patch(color=clmap(0.55), label='Grupo 3')
+g4_patch = mpatches.Patch(color=clmap(0.86), label='Grupo 4')
+
+plt.legend(handles=[g1_patch,g2_patch,g3_patch,g4_patch])
+
+plt.savefig('tramites_poblacion.png')
+plt.savefig('tramites_poblacion.pdf')
+
+plt.show()
 
