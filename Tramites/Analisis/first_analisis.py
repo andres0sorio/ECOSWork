@@ -6,6 +6,7 @@ import ROOT
 from ROOT import TTimeStamp
 from ROOT import TDatime
 from ROOT import gStyle
+from ROOT import TLatex
 from optparse import OptionParser
 import json
 import numpy as np

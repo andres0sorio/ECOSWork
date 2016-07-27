@@ -11,7 +11,8 @@ from optparse import OptionParser
 from ROOT import gStyle
 from ROOT import TLine
 from ROOT import TPaveText
-
+from ROOT import TLatex
+import locale
 
 #------------------------------------------------------------------
 parser = OptionParser()
@@ -27,36 +28,47 @@ if options.input is None:
 filename = options.input
 
 h1 = ROOT.TH1F("Exp1","", 10, 0.0, 50.0)
+h2 = ROOT.TH1F("Exp2","", 10, 0.0, 50.0)
 
 group1 = []
 group2 = []
 group3 = []
 group4 = []
 
+sum = 0.0
+sumg1 = 0.0
+sumg2 = 0.0
+sumg3 = 0.0
+sumg4 = 0.0
+
+add_2016 = False
+
 with open(filename) as inputfile:
     for line in inputfile:
         data = line[:-1].split(',')
         pop = float( data[4] )
 	h1.Fill( float(data[4]))
-
+	h2.Fill( float(data[3]))
+	sum += float(data[4])
+	
         if pop <= 5.0:
                 group1.append(data[0])
+		sumg1 += pop
         elif pop > 5.0 and pop <= 10.0:
                 group2.append(data[0])
+		sumg2 += pop
         elif pop > 10.0 and pop <= 15.0:
                 group3.append(data[0])
+		sumg3 += pop
         elif pop > 15.0:
                 group4.append(data[0])
-        
+		sumg4 += pop
+
 c1 = ROOT.TCanvas("Plot1", "Canvas for plot 1", 385,103,607,452)
 c1.SetFillColor(10)
 c1.SetGridy()
 c1.cd()
 gStyle.SetOptStat(0)
-
-#c2 = ROOT.TCanvas("Plot2", "Canvas for plot 1", 385,103,607,452)
-#c2.SetFillColor(10)
-#c2.cd()
 
 h1.SetFillColor(5)
 h1.GetXaxis().SetTitle("N#acute{u}mero habitantes [x1000]")
@@ -74,10 +86,9 @@ h1.GetYaxis().SetTitleSize(0.05)
 h1.GetYaxis().SetTitleOffset(0.98)
 h1.GetYaxis().SetTitleFont(42)
 
-
-
-
 h1.Draw()
+if add_2016:
+	h2.Draw("SAME")
 
 ymax = 34.0
 
@@ -115,6 +126,32 @@ pt.Draw()
 c1.Modified()
 c1.cd()
 
+tex1 = TLatex(1.1, 27.0,"g1")
+tex1.SetLineWidth(2)
+tex1.Draw()
+
+tex2 = TLatex(6.1, 27.0,"g2")
+tex2.SetLineWidth(2)
+tex2.Draw()
+
+tex3 = TLatex(11.1, 27.0,"g3")
+tex3.SetLineWidth(2)
+tex3.Draw()
+
+tex4 = TLatex(16.1, 27.0,"g4")
+tex4.SetLineWidth(2)
+tex4.Draw()
+
+locale.setlocale(locale.LC_ALL, 'en_US.utf8')
+sumform = locale.format("%d", sum*1000, grouping=True)
+
+print sum, h1.Integral("width")
+
+tex5 = TLatex(30.0, 15.2,"Total: " + str(sumform))
+tex5.SetTextFont(42)
+tex5.SetLineWidth(2)
+tex5.Draw()
+
 c1.Print("population_dist.png")
 
 inputfile.close()
@@ -139,3 +176,5 @@ group3_output.close()
 for mn in group4:
         group4_output.write(mn + '\n')
 group4_output.close()
+
+print sumg1, sumg2, sumg3, sumg4
