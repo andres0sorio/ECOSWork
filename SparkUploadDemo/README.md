@@ -19,7 +19,7 @@ All migraine episodes can be consulted by a Doctor, whom also can give back the 
 
 NOTE: on the windows pwershell you need to do the following:
 
-mvn compile exec:java "-Dexec.mainClass=com.aosorio.nginx.Main"
+mvn compile exec:java "-Dexec.mainClass=edu.uniandes.ecos.codeaholics.main.Main"
 
 
 * Finally go to your browser and enter to the following URI:
