@@ -14,7 +14,7 @@ def selectQuestions(questions,question_per_person):
     return lucky_questions
 
 def runSelection(max_questions):
-    names = ["David","Jheison","Fabian","Andres"]
+    names = ["David","Jheison","Fabian","Andres","Sebastian"]
     questions = range(1, (max_questions+1))
     while len(names) > 0:        
         lucky_name = selectCodeaholic(names)
