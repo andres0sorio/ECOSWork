@@ -4,21 +4,6 @@
 
 package edu.uniandes.ecos.codeaholics.main;
 
-/**
- * Package: edu.uniandes.ecos.codeaholics.main
- *
- * Class: Main Main.java
- * 
- * Original Author: @author AOSORIO
- * 
- * Description: Fileupload test with Java Spark
- * 
- * Implementation: [Notes on implementation]
- *
- * Created: Jul 26, 2016 5:56 PM
- * 
- */
-import spark.*;
 import javax.servlet.http.*;
 
 import com.google.gson.Gson;
@@ -28,17 +13,13 @@ import com.google.gson.JsonParser;
 import java.io.*;
 import java.nio.file.*;
 import static spark.Spark.*;
-import java.io.IOException;
 import java.io.InputStream;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
 import javax.servlet.MultipartConfigElement;
-import javax.servlet.ServletException;
 import static spark.debug.DebugScreen.*;
 
 import org.apache.logging.log4j.LogManager;
@@ -141,6 +122,7 @@ public class Main {
 	//			+ tempFile.toAbsolutePath() + "'");
 	//}
 
+	@SuppressWarnings("unused")
 	private static String getFileName(Part part) {
 		for (String cd : part.getHeader("content-disposition").split(";")) {
 			if (cd.trim().startsWith("filename")) {
