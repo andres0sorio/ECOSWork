@@ -1,0 +1,6 @@
+*.png
+*.pyc
+*.dat
+*.log
+*.json
+data/*.dat
