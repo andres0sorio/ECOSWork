@@ -9,16 +9,17 @@
         <ui:composition template="./template.xhtml">
 
             <ui:define name="title">
-                Player: <h:outputText escape="false" value="#{UserNumberBean.userName}"/>
+                Greetings my friend
             </ui:define>
 
             <ui:define name="box">
-                <h4><h:outputText escape="false" value="#{UserNumberBean.response}"/></h4>
+                <h4>Hi, my name is Duke!</h4>
 
-                <h:form prependId="false">
+                <h5>What is your name?</h5>
 
-                    <h:commandButton id="backButton" value="Back" action="play" />
-
+                <h:form>
+                    <h:inputText size="2" value="#{UserNumberBean.userName}" />
+                    <h:commandButton id="submit" value="submit" action="play" />
                 </h:form>
             </ui:define>
 
