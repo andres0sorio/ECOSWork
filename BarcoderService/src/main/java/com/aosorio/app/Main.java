@@ -10,9 +10,9 @@ package com.aosorio.app;
  * 
  * Original Author: @author AOSORIO
  * 
- * Description: [one line class summary]
+ * Description: Main class for microservice
  * 
- * Implementation: [Notes on implementation]
+ * Implementation: Uses spark java micro framework
  *
  * Created: Oct 24, 2016 6:23:13 AM
  * 
@@ -28,16 +28,18 @@ import spark.ResponseTransformer;
 
 public class Main {
 
-	public static int JETTY_SERVER_PORT          = 4568;
+	public static int JETTY_SERVER_PORT = 4568;
 		
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
 		
+		port(JETTY_SERVER_PORT);
+		
 		get("/hello", (req, res) -> "Hello World");
 		
-		post("/serialnumbers", Main::getSerialNumber, json());
+		get("/serialnumbers", Main::getSerialNumber, json());
 				
 	}
 
