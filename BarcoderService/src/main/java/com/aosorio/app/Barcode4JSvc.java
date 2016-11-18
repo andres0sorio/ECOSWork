@@ -8,6 +8,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.nio.file.Files;
+import java.util.Base64;
 import java.util.Random;
 
 import org.apache.avalon.framework.configuration.Configuration;
@@ -63,7 +65,9 @@ public class Barcode4JSvc implements IBarcodeGenMockSvc {
 			try {
 				BarcodeGenerator gen = BarcodeUtil.getInstance().createBarcodeGenerator(cfg);
 
-				OutputStream out = new java.io.FileOutputStream(new File("output.png"));
+				File outputFile = new File("output.png");
+				
+				OutputStream out = new java.io.FileOutputStream(outputFile);
 				BitmapCanvasProvider provider = new BitmapCanvasProvider(out, "image/x-png", 300,
 						BufferedImage.TYPE_BYTE_GRAY, true, 0);
 
@@ -73,6 +77,7 @@ public class Barcode4JSvc implements IBarcodeGenMockSvc {
 				provider.finish();
 				
 				this.code.setCode( rndSequence );
+				this.code.setBarcodeImg(convertFileToString(outputFile));
 
 			} catch (ConfigurationException e) {
 				e.printStackTrace();
@@ -147,4 +152,15 @@ public class Barcode4JSvc implements IBarcodeGenMockSvc {
 		Object serialNumber = (Object) code;
 		return serialNumber;
 	}
+	
+    /**
+     * @param file
+     * @return
+     * @throws IOException
+     */
+    private String convertFileToString(File file) throws IOException{
+        byte[] bytes = Files.readAllBytes(file.toPath());   
+        return new String(Base64.getEncoder().encode(bytes));
+    }
+    
 }

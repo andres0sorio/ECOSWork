@@ -21,6 +21,7 @@ package com.aosorio.app;
 public class SerialCode {
 
 	String code;
+	String barcodeImg;
 
 	/**
 	 * basic constructor
@@ -43,4 +44,18 @@ public class SerialCode {
 		this.code = code;
 	}
 
+	/**
+	 * @return the barcodeImg
+	 */
+	public String getBarcodeImg() {
+		return barcodeImg;
+	}
+
+	/**
+	 * @param barcodeImg the barcodeImg to set
+	 */
+	public void setBarcodeImg(String barcodeImg) {
+		this.barcodeImg = barcodeImg;
+	}
+	
 }

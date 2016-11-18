@@ -19,6 +19,13 @@ package com.aosorio.app;
  */
 
 import static spark.Spark.*;
+
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+import javax.servlet.http.HttpServletResponse;
+
 import spark.Request;
 import spark.Response;
 
@@ -39,7 +46,7 @@ public class Main {
 		
 		get("/hello", (req, res) -> "Hello World");
 		
-		get("/serialnumbers", Main::getSerialNumber, json());
+		get("/serialnumbers", Main::getSerialNumber,json());
 				
 	}
 
@@ -53,6 +60,8 @@ public class Main {
 			IBarcodeGenMockSvc barcodeGen = new Barcode4JSvc();
 		    barcodeGen.generate();
 		    response = barcodeGen.getCode();
+		    //response = getBarcode(pResponse);
+		    //pResponse.body(barcodeGen.getCode().toString());
 		    pResponse.status(200);
 		    
 		} catch (Exception e) {
@@ -63,6 +72,34 @@ public class Main {
 
 		return response;
 	
+	}
+	
+	public static Object getBarcode(Response pResponse) {
+		
+        Path path = Paths.get("output.png");
+        
+        byte[] data = null;
+        try {
+            data = Files.readAllBytes(path);
+        } catch (Exception e1) {
+
+            e1.printStackTrace();
+        }
+
+        HttpServletResponse raw = pResponse.raw();
+        pResponse.header("Content-Disposition", "attachment; filename=output.png");
+        pResponse.type("image/png");
+        try {
+            raw.getOutputStream().write(data);
+            raw.getOutputStream().flush();
+            raw.getOutputStream().close();
+        } catch (Exception e) {
+
+            e.printStackTrace();
+        }
+        
+        return raw;
+		
 	}
 	
 	public static String toJson(Object pObject) {
