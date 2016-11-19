@@ -20,6 +20,9 @@ package com.aosorio.app;
 
 import static spark.Spark.*;
 
+import com.google.gson.Gson;
+
+import spark.ResponseTransformer;
 
 public class Main {
 
@@ -27,14 +30,27 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+
+		get("/hello", (req, res) -> "Hello World");
+
+		// 1. Expose an ID verification service
+		post("/cedulas/verificaciones", BasicExposedServices::idVerificationService, json());
 		
-		 get("/hello", (req, res) -> "Hello World");
-		 
-		 //1. Expose an ID verification service
-		 
-		 //2. Expose a Pay button service
-		 
-		 
+		// 2. Expose a Pay button service
+		
+		
+		
+
+	}
+
+	public static String toJson(Object pObject) {
+
+		return new Gson().toJson(pObject);
+	}
+
+	public static ResponseTransformer json() {
+
+		return Main::toJson;
 	}
 
 }
