@@ -60,8 +60,6 @@ public class Main {
 			IBarcodeGenMockSvc barcodeGen = new Barcode4JSvc();
 		    barcodeGen.generate();
 		    response = barcodeGen.getCode();
-		    //response = getBarcode(pResponse);
-		    //pResponse.body(barcodeGen.getCode().toString());
 		    pResponse.status(200);
 		    
 		} catch (Exception e) {
