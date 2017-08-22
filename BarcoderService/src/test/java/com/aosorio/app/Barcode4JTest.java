@@ -6,7 +6,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
+//import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -53,11 +53,11 @@ public class Barcode4JTest {
 			URL appUrl = new URL(serverPath + route);
 
 			// TODO ... study and understand why this fixes the Connection
-			// refused error
+			/* refused error
 			System.out.println("===== 0. ");
 			InputStream response = new URL("http://stackoverflow.com").openStream();
 			response.close();
-			System.out.println("===== 0. =====");
+			System.out.println("===== 0. =====");*/
 
 			HttpURLConnection urlConnection = (HttpURLConnection) appUrl.openConnection();
 			urlConnection.setDoOutput(true);
@@ -117,11 +117,11 @@ public class Barcode4JTest {
 			URL appUrl = new URL(serverPath + route);
 
 			// TODO ... study and understand why this fixes the Connection
-			// refused error
+			/* refused error
 			System.out.println("===== 0. ");
 			InputStream response = new URL("http://stackoverflow.com").openStream();
 			response.close();
-			System.out.println("===== 0. =====");
+			System.out.println("===== 0. =====");*/
 
 			HttpURLConnection urlConnection = (HttpURLConnection) appUrl.openConnection();
 			urlConnection.setDoOutput(true);
